@@ -40,7 +40,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font
 .item-card:hover{border-color:var(--border-med);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.05)}
 .item-img{aspect-ratio:1;background:var(--surface2);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .item-img img{width:100%;height:100%;object-fit:cover}
-.item-img .placeholder{font-size:24px;color:var(--text3)}
+.item-img .placeholder{font-size:24px;color:var(--text3);display:flex;align-items:center;justify-content:center}
 
 /* 購物車區 */
 .cart-panel{width:360px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(0,0,0,0.04)}
@@ -119,13 +119,31 @@ td{padding:12px 20px;border-bottom:1px solid var(--border)}
 
 <script>
 // ── 資料與邏輯 ──────────────────────────────────────────────────
-// 假設 img 欄位現在包含多個連結
+
+// 測試用的資料，請確認你的 Google Sheets 格式與此一致
 const inventory = [
-  { id:'TSB-S', name:'活動 T-Shirt', spec:'黑 / S', price:590, stock:10, sold:0, img:'img/t-shirt-black.png,img/t-shirt-preorder.png' },
-  { id:'TSW-S', name:'活動 T-Shirt', spec:'白 / S', price:590, stock:8,  sold:0, img:'img/t-shirt-white.png' }
+  { id:'TSB-S', name:'活動 T-Shirt', spec:'黑 / S', price:590, stock:10, sold:0, img:'https://drive.google.com/file/d/1Xxxxxxxx/view, https://another-link.com' },
+  { id:'TSW-S', name:'活動 T-Shirt', spec:'白 / S', price:590, stock:8,  sold:0, img:'https://img.icons8.com/color/96/t-shirt.png' }
 ];
 
 let cart = [];
+
+/**
+ * 自動轉換 Google Drive 分享連結為直接顯示連結
+ */
+function formatImageUrl(url) {
+  if (!url) return "";
+  let cleanUrl = url.trim();
+  
+  // 如果是 Google Drive 連結，進行轉換
+  if (cleanUrl.includes('drive.google.com')) {
+    const fileIdMatch = cleanUrl.match(/\/d\/(.+?)\//) || cleanUrl.match(/id=(.+?)(&|$)/);
+    if (fileIdMatch && fileIdMatch[1]) {
+      return `https://lh3.googleusercontent.com/d/${fileIdMatch[1]}`;
+    }
+  }
+  return cleanUrl;
+}
 
 function renderInventory() {
   const container = document.getElementById('pos-items');
@@ -133,27 +151,30 @@ function renderInventory() {
   container.innerHTML = '';
   
   inventory.forEach(item => {
-    // 【關鍵修改】：拆分多個連結，只取第一個
-    let firstImg = "";
+    // 1. 拆分多個連結
+    let rawImg = "";
     if (item.img && typeof item.img === 'string') {
       const imgList = item.img.split(/[,;\n]/).map(url => url.trim());
-      firstImg = imgList[0]; 
+      rawImg = imgList[0]; 
     } else {
-      firstImg = item.img;
+      rawImg = item.img;
     }
+
+    // 2. 格式化網址 (處理 Google Drive 等問題)
+    const displayImg = formatImageUrl(rawImg);
 
     const card = document.createElement('div');
     card.className = 'item-card';
     
-    // 如果圖片壞掉，自動顯示 Emoji 衣服
-    const imgHtml = firstImg 
-      ? `<img src="${firstImg}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">`
+    // 3. 渲染 HTML，如果圖片載入失敗 (onerror) 則顯示 Emoji
+    const imgHtml = displayImg 
+      ? `<img src="${displayImg}" onload="this.style.display='block'; this.nextElementSibling.style.display='none'" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">`
       : '';
 
     card.innerHTML = `
       <div class="item-img">
         ${imgHtml}
-        <div class="placeholder" style="display:${firstImg ? 'none' : 'flex'}">👕</div>
+        <div class="placeholder" style="display:${displayImg ? 'none' : 'flex'}">👕</div>
       </div>
       <div class="item-info">
         <div class="item-name">${item.name} <br><small>${item.spec}</small></div>
@@ -200,7 +221,10 @@ function toast(m,t) {
   w.appendChild(e); setTimeout(() => e.remove(), 2000);
 }
 
-window.onload = () => { renderInventory(); document.getElementById('sync').className = 'sync online'; };
+window.onload = () => { 
+  renderInventory(); 
+  document.getElementById('sync').className = 'sync online'; 
+};
 </script>
 </body>
 </html>
