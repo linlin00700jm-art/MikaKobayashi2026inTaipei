@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>小林未郁 Mika Kobayashi 2026 ONE-MAN LIVE in Taipei 週邊預購</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@500&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e0c0c;--bg2:#161212;--surface:#1c1717;--surface2:#241e1e;--surface3:#2e2626;
+  --border:rgba(255,255,255,0.07);--border-med:rgba(255,255,255,0.13);
+  --text:#f0ebe8;--text2:#b0a8a4;--text3:#6e6460;
+  --red:#c0392b;--red-light:#e05044;--red-dark:#8b2020;
+  --red-bg:rgba(192,57,43,0.15);--red-border:rgba(192,57,43,0.35);
+  --r:10px;--rl:14px;
+  --mono:'DM Mono',monospace;--sans:'Noto Sans TC',sans-serif;--display:'Cinzel',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:15px;min-height:100vh}
+.header{position:relative;background:var(--bg);padding:28px 20px 20px;text-align:center;border-bottom:1px solid var(--border);overflow:hidden}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),#e8b4b0,var(--red),transparent)}
+.header::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:100px;background:radial-gradient(ellipse at top,rgba(192,57,43,0.18) 0%,transparent 70%);pointer-events:none}
+.header-event{font-size:11px;font-family:var(--display);letter-spacing:.2em;color:var(--red-light);margin-bottom:8px;text-transform:uppercase}
+.header-logo{font-family:var(--display);font-size:28px;font-weight:700;background:linear-gradient(135deg,#e8b4b0 0%,var(--red-light) 40%,var(--red) 70%,#8b2020 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
+.header-jp{font-size:13px;color:var(--text2);letter-spacing:.12em;margin-bottom:4px}
+.header-meta{font-size:12px;color:var(--text3);letter-spacing:.06em}
+.header-meta span{color:var(--text2)}
+.steps{display:flex;align-items:center;justify-content:center;padding:12px 20px;background:var(--bg2);border-bottom:1px solid var(--border)}
+.step{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--text3)}
+.step.active{color:var(--red-light)}
+.step-num{width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:var(--mono);flex-shrink:0}
+.step.active .step-num{background:var(--red);color:#fff;border-color:var(--red)}
+.step.done .step-num{background:var(--surface3);color:var(--text3)}
+.step-div{width:28px;height:1px;background:var(--border-med);margin:0 4px}
+.main{max-width:680px;margin:0 auto;padding:20px 16px 80px}
+.notice-box{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:var(--rl);padding:14px 16px;margin-bottom:20px}
+.notice-title{font-size:13px;font-weight:700;color:var(--red-light);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.notice-item{font-size:13px;color:var(--text2);line-height:1.9;padding-left:14px;position:relative}
+.notice-item::before{content:'•';position:absolute;left:0;color:var(--text3)}
+.notice-item.hl{color:var(--red-light);font-weight:500}
+.cat-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px}
+.lightbox-close{position:absolute;top:16px;right:20px;font-size:28px;color:#fff;cursor:pointer;background:none;border:none;line-height:1}
+.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.15);border:none;color:#fff;font-size:24px;cursor:pointer;padding:12px 16px;border-radius:8px}
+.lightbox-prev{left:16px}.lightbox-next{right:16px}
+/* Image slider */
+.img-slider{position:relative;background:var(--surface2);overflow:hidden;aspect-ratio:1/1}
+.img-slider-track{display:flex;height:100%;transition:transform .3s ease}
+.img-slider-track img{width:100%;height:100%;flex-shrink:0;object-fit:cover;cursor:zoom-in}
+.img-slider-dots{position:absolute;bottom:6px;left:0;right:0;display:flex;justify-content:center;gap:4px}
+.img-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:background .15s}
+.img-dot.active{background:#fff}
+.img-slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);border:none;color:#fff;font-size:16px;cursor:pointer;padding:8px 10px;border-radius:6px;line-height:1}
+.img-slider-btn.prev{left:6px}.img-slider-btn.next{right:6px}
+.cat-tab{padding:7px 16px;border-radius:20px;border:1px solid var(--border-med);background:none;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;font-family:var(--sans);transition:all .12s}
+.cat-tab.active{background:var(--red);border-color:var(--red);color:#fff}
+.cat-tab:hover:not(.active){border-color:var(--red-border);color:var(--red-light)}
+.sec-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-label::before{content:'';display:block;width:3px;height:12px;background:var(--red);border-radius:2px;flex-shrink:0}
+.product-list{display:flex;flex-direction:column;gap:12px;margin-bottom:24px}
+.product-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;transition:border-color .15s;display:flex;flex-direction:row;align-items:stretch}
+.product-card:hover:not(.sold-out){border-color:var(--red-border)}
+.product-card.selected{border-color:var(--red);box-shadow:0 0 0 1px var(--red)}
+.product-card.sold-out{opacity:.38}
+.pc-img-wrap{width:120px;min-width:120px;flex-shrink:0;background:var(--surface2)}
+.pc-img{width:100%;height:100%;object-fit:cover;display:block}
+.pc-ph{width:100%;height:100%;min-height:120px;display:flex;align-items:center;justify-content:center;font-size:36px}
+.pc-body{flex:1;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;min-height:120px}
+.p-name{font-size:15px;font-weight:700;margin-bottom:3px;color:var(--text);line-height:1.4}
+.p-cat{font-size:11px;color:var(--text3);margin-bottom:8px}
+.p-price{font-size:16px;font-family:var(--mono);font-weight:500;color:var(--red-light);margin-bottom:8px}
+.p-sold-out{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--surface2);color:var(--text3);display:inline-block;margin-bottom:8px}
+.size-select{width:100%;padding:8px 10px;border:1px solid var(--border-med);border-radius:8px;background:var(--surface2);color:var(--text);font-size:13px;font-family:var(--sans);margin-bottom:10px;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236e6460' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+.size-select:focus{outline:none;border-color:var(--red)}
+.qty-row{display:flex;align-items:center;gap:8px}
+.qty-label{font-size:11px;color:var(--text3);flex:1}
+.qc{display:flex;align-items:center;gap:8px}
+.qb{width:34px;height:34px;border-radius:50%;border:1px solid var(--border-med);background:var(--surface2);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;color:var(--text);transition:all .1s;touch-action:manipulation;flex-shrink:0}
+.qb:hover:not(:disabled){border-color:var(--red-border);background:var(--red-bg);color:var(--red-light)}
+.qb:disabled{opacity:.25;cursor:default}
+.qn{font-size:16px;font-family:var(--mono);font-weight:500;min-width:24px;text-align:center}
+@media(min-width:600px){
+  .product-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .product-card{flex-direction:column}
+  .pc-img-wrap{width:100%;min-width:unset;height:200px}
+  .pc-ph{min-height:200px}
+  .pc-body{min-height:auto}
+}
+@media(min-width:900px){
+  .product-list{grid-template-columns:repeat(3,1fr);gap:16px}
+  .pc-img-wrap{height:220px}
+}
+.cart-sum{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:24px}
+.cr{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)}
+.cr:last-of-type{border-bottom:none}
+.cr .nm{color:var(--text2)}.cr .am{font-family:var(--mono);font-weight:500;color:var(--text)}
+.ct-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-med)}
+.ct-label{font-size:13px;font-weight:700;color:var(--text2)}
+.ct-amt{font-size:22px;font-family:var(--mono);font-weight:700;color:var(--red-light)}
+.fs{margin-bottom:24px}
+.ft{font-size:13px;font-weight:700;color:var(--text2);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.ft::before{content:'';display:block;width:3px;height:13px;background:var(--red);border-radius:2px}
+.fg{margin-bottom:14px}
+.fl{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--text3);display:block;margin-bottom:5px}
+.fl .req{color:var(--red-light);margin-left:2px}
+.fi{width:100%;padding:11px 14px;border:1px solid var(--border-med);border-radius:var(--r);font-size:15px;font-family:var(--sans);background:var(--surface);color:var(--text);transition:border-color .12s}
+.fi:focus{outline:none;border-color:var(--red)}
+.fi.error{border-color:var(--red-light)}
+.fi-hint{font-size:11px;color:var(--text3);margin-top:4px}
+textarea.fi{resize:vertical}
+.ob{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:16px}
+.obr{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)}
+.obr:last-child{border-bottom:none}
+.obr .k{color:var(--text2)}.obr .v{font-weight:500;font-family:var(--mono);color:var(--text)}
+.cn{background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--r);padding:12px 14px;font-size:13px;color:#e8a09a;line-height:1.7;margin-bottom:16px}
+.btn-p{width:100%;padding:15px;background:linear-gradient(135deg,var(--red-light),var(--red),var(--red-dark));color:#fff;border:none;border-radius:var(--r);font-size:16px;font-weight:700;cursor:pointer;font-family:var(--sans);transition:opacity .15s;letter-spacing:.04em;min-height:52px;touch-action:manipulation}
+.btn-p:hover{opacity:.88}.btn-p:disabled{opacity:.28;cursor:default}
+.btn-o{width:100%;padding:12px;background:none;border:1px solid var(--border-med);border-radius:var(--r);font-size:14px;cursor:pointer;color:var(--text2);font-family:var(--sans);margin-top:8px;transition:all .1s;min-height:48px}
+.btn-o:hover{background:var(--surface2)}
+.sw{text-align:center;padding:40px 20px}
+.si{width:64px;height:64px;background:var(--red-bg);border:1px solid var(--red-border);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:26px;color:var(--red-light)}
+.st{font-size:22px;font-weight:700;margin-bottom:8px}
+.ss{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:24px}
+.twrap{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:300;pointer-events:none}
+.toast{background:#fff;color:#1a1917;border:1px solid rgba(0,0,0,0.12);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transform:translateY(6px);transition:all .2s;white-space:nowrap;box-shadow:0 4px 16px rgba(0,0,0,0.3)}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.ok{background:#2a6049;color:#fff;border-color:#2a6049}
+.toast.err{background:#c0392b;color:#fff;border-color:#c0392b}
+.loading{text-align:center;color:var(--text3);font-size:13px;padding:40px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--border-med);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-event">2026 One-Man Live in Taipei</div>
+  <div class="header-logo">Mika Kobayashi</div>
+  <div class="header-jp">小林未郁　週邊預購</div>
+  <div class="header-meta"><span>04.19 SUN</span>　Legacy Taipei</div>
+</div>
+
+<div class="steps" id="steps">
+  <div class="step active" id="step1"><div class="step-num">1</div><span>選商品</span></div>
+  <div class="step-div"></div>
+  <div class="step" id="step2"><div class="step-num">2</div><span>填資料</span></div>
+  <div class="step-div"></div>
+  <div class="step" id="step3"><div class="step-num">3</div><span>確認</span></div>
+</div>
+
+<div class="main">
+
+  <div id="panel-products">
+    <div class="notice-box">
+      <div class="notice-title">⚠ 重要規範 Notice</div>
+      <div class="notice-item">現場取貨付款 (現金 / Cash Only)</div>
+      <div class="notice-item">每張票券編號限預購乙次</div>
+      <div class="notice-item hl">各項商品每人限購 2 件</div>
+    </div>
+    <div id="spec-notice" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--text2);line-height:1.7;display:none"></div>
+    <div class="sec-label">選擇週邊商品</div>
+    <div class="product-list" id="product-list">
+      <div class="loading"><span class="spinner"></span>載入商品中…</div>
+    </div>
+    <div id="cart-preview" style="display:none">
+      <div class="sec-label">已選購項目</div>
+      <div class="cart-sum">
+        <div id="cart-rows"></div>
+        <div class="ct-row">
+          <span class="ct-label">預購總金額</span>
+          <span class="ct-amt" id="cart-total">NT$0</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn-p" id="next-btn" disabled onclick="goToStep2()">下一步：填寫資料 →</button>
+  </div>
+
+  <div id="panel-form" style="display:none">
+    <div class="fs">
+      <div class="ft">聯絡資料</div>
+      <div class="fg"><label class="fl">姓名 <span class="req">*</span></label><input class="fi" type="text" id="f-name" placeholder="請輸入真實姓名"></div>
+      <div class="fg"><label class="fl">Email <span class="req">*</span></label><input class="fi" type="email" id="f-email" placeholder="用於接收訂單確認信"></div>
+      <div class="fg"><label class="fl">手機號碼 <span class="req">*</span></label><input class="fi" type="tel" id="f-phone" placeholder="09xxxxxxxx"></div>
+      <div class="fg">
+        <label class="fl">票券號碼 <span class="req">*</span></label>
+        <div style="display:flex;gap:8px">
+          <select class="fi" id="f-ticket-area" style="flex:0 0 110px;padding:11px 10px">
+            <option value="" disabled selected>區域</option>
+            <option value="VVIP">VVIP</option>
+            <option value="VIP">VIP</option>
+            <option value="GA">GA</option>
+          </select>
+          <input class="fi" type="number" id="f-ticket-serial" placeholder="序號，例：100" style="flex:1" min="1" inputmode="numeric">
+        </div>
+        <div class="fi-hint">範例：VIP-100 或 GA-250　每張票券限預購乙次，請確認號碼正確</div>
+      </div>
+    </div>
+    <div class="fs">
+      <div class="ft">備註</div>
+      <div class="fg"><textarea class="fi" id="f-note" rows="3" placeholder="特殊需求等（選填）"></textarea></div>
+    </div>
+    <button class="btn-p" onclick="goToStep3()">下一步：確認訂單 →</button>
+    <button class="btn-o" onclick="goToStep1()">← 返回修改商品</button>
+  </div>
+
+  <div id="panel-confirm" style="display:none">
+    <div class="sec-label">訂單確認</div>
+    <div class="cart-sum" style="margin-bottom:16px">
+      <div id="confirm-items"></div>
+      <div class="ct-row">
+        <span class="ct-label">預購總金額</span>
+        <span class="ct-amt" id="confirm-total">NT$0</span>
+      </div>
+    </div>
+    <div class="ob" id="confirm-info"></div>
+    <div class="cn">活動當天現場取貨付款（現金），請出示預購編號給工作人員核銷。</div>
+    <button class="btn-p" id="submit-btn" onclick="submitOrder()">確認送出預購</button>
+    <button class="btn-o" onclick="goToStep2()">← 返回修改資料</button>
+  </div>
+
+  <div id="panel-success" style="display:none">
+    <div class="sw">
+      <div class="si">✓</div>
+      <div class="st">預購成功！</div>
+      <div class="ss" id="success-msg"></div>
+      <div class="ob" id="success-order"></div>
+      <div class="cn" id="success-notice"></div>
+      <button class="btn-o" onclick="location.reload()">繼續預購</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-prev" id="lb-prev" onclick="lbNav(-1);event.stopPropagation()">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next" onclick="lbNav(1);event.stopPropagation()">&#8250;</button>
+</div>
+<div class="twrap" id="twrap"></div>
+
+<script>
+var products=[],cart={},currentCat='';
+var displayItems=[]; // 合併後的顯示用商品列表
+var PER_PERSON_LIMIT=2;
+var TSHIRT_KEYWORD='T恤';
+// 鑰匙圈相關ID（動態建立）
+var SHARED_GROUP_IDS=[];  // [套組ID, A款ID, B款ID]
+var BUNDLE_ID='';         // 套組商品ID
+var BUNDLE_A_ID='';       // A款ID
+var BUNDLE_B_ID='';       // B款ID
+
+// 計算某T恤款式的已購總數（同款式不同尺寸加總）
+function getTshirtBaseQty(baseName) {
+  return products.reduce(function(s, p) {
+    var parsed = parseName(p.name);
+    if (parsed.base === baseName && cart[p.id]) {
+      s += cart[p.id].qty;
+    }
+    return s;
+  }, 0);
+}
+
+// 取得鑰匙圈各商品的可購上限
+function getKeychainMax(id) {
+  // 規則：A最多2件、B最多2件，套組每組佔用A×1 + B×1的名額
+  // 套組最多2組（受A、B各自上限制約）
+  var KEYCHAIN_LIMIT = 2; // A或B各自的上限
+  var bundleQty = cart[BUNDLE_ID] ? cart[BUNDLE_ID].qty : 0;
+  var aOnlyQty = cart[BUNDLE_A_ID] ? cart[BUNDLE_A_ID].qty : 0;
+  var bOnlyQty = cart[BUNDLE_B_ID] ? cart[BUNDLE_B_ID].qty : 0;
+  var aTotalUsed = aOnlyQty + bundleQty; // A單款 + 套組中的A
+  var bTotalUsed = bOnlyQty + bundleQty; // B單款 + 套組中的B
+
+  if (id === BUNDLE_ID) {
+    // 套組上限：A和B各自還能容納幾個，取最小值
+    var aRoom = KEYCHAIN_LIMIT - (aTotalUsed - bundleQty); // 排除當前套組，看A還剩幾個名額
+    var bRoom = KEYCHAIN_LIMIT - (bTotalUsed - bundleQty); // 同上
+    return Math.max(0, Math.min(aRoom, bRoom));
+  } else if (id === BUNDLE_A_ID) {
+    // A單款：A總數（含套組佔用）不超過KEYCHAIN_LIMIT
+    return Math.max(0, KEYCHAIN_LIMIT - (aTotalUsed - aOnlyQty)); // 排除A單款自己
+  } else if (id === BUNDLE_B_ID) {
+    // B單款：B總數（含套組佔用）不超過KEYCHAIN_LIMIT
+    return Math.max(0, KEYCHAIN_LIMIT - (bTotalUsed - bOnlyQty)); // 排除B單款自己
+  }
+  return PER_PERSON_LIMIT;
+}
+
+// 解析商品名稱，取得基本名稱和尺寸
+// 支援兩種格式：
+// 「T恤 款式A / XL」-> {base:'T恤 款式A', size:'XL'}
+// 「T恤 款式A XL」 -> {base:'T恤 款式A', size:'XL'}
+function parseName(name){
+  var sizes=['3XL','2XL','XL','L','M','S'];
+  // 先嘗試 / 分隔格式
+  if(name.indexOf(' / ')>-1){
+    var parts=name.split(' / ');
+    var lastPart=parts[parts.length-1].trim();
+    if(sizes.indexOf(lastPart)>-1){
+      return{base:parts.slice(0,parts.length-1).join(' / ').trim(),size:lastPart};
+    }
+  }
+  // 再嘗試空格分隔格式
+  for(var i=0;i<sizes.length;i++){
+    var s=sizes[i];
+    if(name.endsWith(' '+s)){
+      return{base:name.slice(0,name.length-s.length-1).trim(),size:s};
+    }
+  }
+  return{base:name,size:''};
+}
+
+// 把商品列表合併成顯示用列表（同款T恤合成一個）
+function buildDisplayItems(prods){
+  var grouped={};
+  var order=[];
+  prods.forEach(function(p){
+    var parsed=parseName(p.name);
+    if(parsed.size && p.name.indexOf(TSHIRT_KEYWORD)>-1){
+      if(!grouped[parsed.base]){
+        grouped[parsed.base]={
+          id:'group_'+parsed.base,
+          name:parsed.base,
+          price:p.price,
+          category:p.category,
+          image:p.image,
+          spec:p.spec||'',
+          preorderStatus:p.preorderStatus,
+          isGroup:true,
+          variants:[]
+        };
+        order.push(parsed.base);
+      }
+      grouped[parsed.base].variants.push({id:p.id,size:parsed.size,stock:p.stock});
+    } else {
+      // 非尺寸商品直接加入
+      grouped[p.id]={
+        id:p.id,name:p.name,price:p.price,
+        category:p.category,image:p.image,
+        spec:p.spec||'',
+        preorderStatus:p.preorderStatus,
+        stock:p.stock,bundleA:p.bundleA,bundleB:p.bundleB,
+        isGroup:false
+      };
+      order.push(p.id);
+    }
+  });
+  // 建立鑰匙圈群組 IDs
+  SHARED_GROUP_IDS=[];
+  BUNDLE_ID=''; BUNDLE_A_ID=''; BUNDLE_B_ID='';
+  prods.forEach(function(p){
+    if(p.bundleA&&p.bundleB){
+      BUNDLE_ID=p.id;
+      BUNDLE_A_ID=p.bundleA;
+      BUNDLE_B_ID=p.bundleB;
+      if(SHARED_GROUP_IDS.indexOf(p.id)===-1)SHARED_GROUP_IDS.push(p.id);
+      if(SHARED_GROUP_IDS.indexOf(p.bundleA)===-1)SHARED_GROUP_IDS.push(p.bundleA);
+      if(SHARED_GROUP_IDS.indexOf(p.bundleB)===-1)SHARED_GROUP_IDS.push(p.bundleB);
+    }
+  });
+  return order.map(function(key){return grouped[key];});
+}
+
+function getApiUrl(){return 'https://script.google.com/macros/s/AKfycbwIE9Dnt_1wBCVMKD9scimzcoIs56ok0L5WbYmX0E5ziLcBdh_p7r2fpL6ltpFRYvx4/exec';}
+
+window.addEventListener('load',function(){
+  var url=getApiUrl();
+  if(!url){document.getElementById('product-list').innerHTML='<div class="loading" style="color:var(--text3)">請稍候…</div>';return;}
+  fetch(url+'?action=getProducts',{redirect:'follow'})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      products=(d.products||[]).filter(function(p){return p.preorderStatus==='開放';});
+      displayItems=buildDisplayItems(products);
+      renderProducts();
+    })
+    .catch(function(e){toast('載入失敗：'+e.message,'err');});
+});
+
+function buildCatTabs(){} // removed - replaced by spec notice
+function filterCat(cat){}  // removed
+
+function isTshirt(p){return p.category==='服飾';}
+
+function renderProducts(){
+  var list=document.getElementById('product-list');
+  var filtered=currentCat?displayItems.filter(function(p){return p.category===currentCat;}):displayItems;
+  if(!filtered.length){list.innerHTML='<div class="loading" style="color:var(--text3)">沒有商品</div>';return;}
+  list.innerHTML=filtered.map(function(p){
+    return p.isGroup ? renderGroupCard(p) : renderSingleCard(p);
+  }).join('');
+}
+
+// ── 圖片滑動 + Lightbox ──────────────────────────────────────
+var sliderIdx={};
+var lbImages=[], lbIdx=0;
+
+function makeSlider(images, cardId){
+  if(!images||images.length===0) return '<div class="pc-ph">&#128717;</div>';
+  var imgs=images.map(function(url,i){
+    return '<img src="'+url+'" loading="lazy" style="width:100%;flex-shrink:0;object-fit:cover;cursor:zoom-in" onclick="openLightbox(\''+cardId+'\','+i+');event.stopPropagation()">';
+  }).join('');
+  if(images.length===1){
+    return '<div class="img-slider-track" style="height:100%" id="track-'+cardId+'">'+imgs+'</div>';
+  }
+  var dots=images.map(function(_,i){
+    return '<div class="img-dot'+(i===0?' active':'')+'" onclick="sliderGo(\''+cardId+'\','+i+');event.stopPropagation()"></div>';
+  }).join('');
+  return '<div class="img-slider-track" id="track-'+cardId+'">'+imgs+'</div>'+
+    '<button class="img-slider-btn prev" onclick="sliderNav(\''+cardId+'\',-1);event.stopPropagation()">&#8249;</button>'+
+    '<button class="img-slider-btn next" onclick="sliderNav(\''+cardId+'\',1);event.stopPropagation()">&#8250;</button>'+
+    '<div class="img-slider-dots" id="dots-'+cardId+'">'+dots+'</div>';
+}
+
+function sliderNav(cardId,dir){
+  var track=document.getElementById('track-'+cardId);
+  if(!track)return;
+  var total=track.children.length;
+  sliderIdx[cardId]=((sliderIdx[cardId]||0)+dir+total)%total;
+  sliderGo(cardId,sliderIdx[cardId]);
+}
+function sliderGo(cardId,idx){
+  sliderIdx[cardId]=idx;
+  var track=document.getElementById('track-'+cardId);
+  if(track)track.style.transform='translateX(-'+idx+'00%)';
+  var dotsEl=document.getElementById('dots-'+cardId);
+  if(dotsEl)Array.from(dotsEl.children).forEach(function(d,i){d.classList.toggle('active',i===idx);});
+}
+
+function openLightbox(cardId,idx){
+  var track=document.getElementById('track-'+cardId);
+  if(!track)return;
+  lbImages=Array.from(track.querySelectorAll('img')).map(function(img){return img.src;});
+  lbIdx=idx;
+  document.getElementById('lightbox-img').src=lbImages[idx];
+  document.getElementById('lightbox').classList.add('open');
+  document.getElementById('lb-prev').style.display=lbImages.length>1?'':'none';
+  document.getElementById('lb-next').style.display=lbImages.length>1?'':'none';
+}
+function closeLightbox(e){
+  if(!e||e.target===document.getElementById('lightbox'))
+    document.getElementById('lightbox').classList.remove('open');
+}
+function lbNav(dir){
+  lbIdx=(lbIdx+dir+lbImages.length)%lbImages.length;
+  document.getElementById('lightbox-img').src=lbImages[lbIdx];
+}
+
+// ── 商品卡片渲染 ─────────────────────────────────────────────
+function renderGroupCard(p){
+  var allOut=p.variants.every(function(v){return v.stock===0;});
+  var gKey=p.name.replace(/ /g,'_');
+  var images=p.image?p.image.split(',').map(function(s){return s.trim();}).filter(Boolean):[];
+  var sliderHtml='<div class="img-slider">'+makeSlider(images,'g-'+gKey)+'</div>';
+  var firstProd=p.variants[0]?products.find(function(x){return x.id===p.variants[0].id;}):null;
+  var spec=firstProd?firstProd.spec||'':'';
+  var sizeOptions=p.variants.map(function(v){
+    return '<option value="'+v.id+'"'+(v.stock===0?' disabled':'')+'>'+v.size+(v.stock===0?' (售完)':'')+'</option>';
+  }).join('');
+  var placeholder='<option value="" disabled selected style="color:var(--text3)">選擇尺寸 Size</option>';
+  var sizeHtml='<select class="size-select" id="gsize-'+gKey+'" onchange="onGroupSizeChange(\''+gKey+'\')"'+(allOut?' disabled':'')+'>'+placeholder+sizeOptions+'</select>';
+  var stockHtml=allOut?'<span class="p-sold-out">售完</span>':'<span id="gstock-'+gKey+'" style="font-size:11px;color:var(--text3);margin-bottom:8px;display:block"></span>';
+  return '<div class="product-card'+(allOut?' sold-out':'')+'" id="card-g-'+gKey+'">'+
+    sliderHtml+
+    '<div class="pc-body">'+
+      '<div>'+
+        '<div class="p-name">'+p.name+'</div>'+
+        (spec?'<div style="font-size:11px;color:var(--text3);margin-bottom:6px;line-height:1.6">'+spec+'</div>':'')+
+        sizeHtml+stockHtml+
+        '<div class="p-price">NT$'+p.price+'</div>'+
+      '</div>'+
+      '<div class="qty-row">'+
+        '<span class="qty-label">數量</span>'+
+        '<div class="qc">'+
+          '<button class="qb" id="gqm-'+gKey+'" onclick="changeGroupQty(\''+gKey+'\',-1)" disabled'+(allOut?' disabled':'')+'>&#8722;</button>'+
+          '<span class="qn" id="gqn-'+gKey+'">0</span>'+
+          '<button class="qb" id="gqp-'+gKey+'" onclick="changeGroupQty(\''+gKey+'\',1)"'+(allOut?' disabled':'')+'>&#43;</button>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+function renderSingleCard(p){
+  var stock=getEffectiveStock(p);
+  var out=stock===0;
+  var images=p.image?p.image.split(',').map(function(s){return s.trim();}).filter(Boolean):[];
+  var sliderHtml='<div class="img-slider">'+makeSlider(images,p.id)+'</div>';
+  return '<div class="product-card'+(out?' sold-out':'')+'" id="card-'+p.id+'">'+
+    sliderHtml+
+    '<div class="pc-body">'+
+      '<div>'+
+        '<div class="p-name">'+p.name+'</div>'+
+        (p.spec?'<div style="font-size:11px;color:var(--text3);margin-bottom:6px;line-height:1.6">'+p.spec+'</div>':'')+
+        (out?'<span class="p-sold-out">售完</span>':'')+
+        '<div class="p-price">NT$'+p.price+'</div>'+
+      '</div>'+
+      '<div class="qty-row">'+
+        '<span class="qty-label">數量</span>'+
+        '<div class="qc">'+
+          '<button class="qb" id="qm-'+p.id+'" onclick="changeQty(\''+p.id+'\',-1)" disabled'+(out?' disabled':'')+'>&#8722;</button>'+
+          '<span class="qn" id="qn-'+p.id+'">0</span>'+
+          '<button class="qb" id="qp-'+p.id+'" onclick="changeQty(\''+p.id+'\',1)"'+(out?' disabled':'')+'>&#43;</button>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+}
+
+function onGroupSizeChange(gKey){
+  var sel=document.getElementById('gsize-'+gKey);
+  if(!sel)return;
+  var p=products.find(function(x){return x.id===sel.value;});
+  if(!p)return;
+  var stockEl=document.getElementById('gstock-'+gKey);
+  if(stockEl)stockEl.textContent=p.stock>0?'剩 '+p.stock+' 件':'售完';
+  var qty=cart[p.id]?cart[p.id].qty:0;
+  document.getElementById('gqn-'+gKey).textContent=qty;
+  document.getElementById('gqm-'+gKey).disabled=qty===0;
+  var max=Math.min(p.stock,PER_PERSON_LIMIT);
+  document.getElementById('gqp-'+gKey).disabled=qty>=max||p.stock===0;
+}
+
+function changeGroupQty(gKey,d){
+  var sel=document.getElementById('gsize-'+gKey);
+  if(!sel)return;
+  if(!sel.value){toast('請先選擇尺寸','err');return;}
+  var p=products.find(function(x){return x.id===sel.value;});
+  if(!p)return;
+  var cur=cart[p.id]?cart[p.id].qty:0;
+  var newQty=cur+d;
+  if(newQty<0)newQty=0;
+  // T恤：同款式加總上限
+  var parsed=parseName(p.name);
+  var baseQty=getTshirtBaseQty(parsed.base)-(cur);
+  var max=Math.min(p.stock,PER_PERSON_LIMIT-baseQty);
+  if(newQty>max){
+    newQty=max;
+    toast('同款 T恤（'+parsed.base+'）合計限購 '+PER_PERSON_LIMIT+' 件','err');
+  }
+  if(newQty===0){delete cart[p.id];}
+  else{cart[p.id]={qty:newQty,size:parsed.size,name:p.name};}
+  document.getElementById('gqn-'+gKey).textContent=newQty;
+  document.getElementById('gqm-'+gKey).disabled=newQty===0;
+  // 重新計算所有尺寸的 + 按鈕
+  var group=displayItems.find(function(x){return x.isGroup&&x.name===gKey.replace(/_/g,' ');});
+  if(group){
+    group.variants.forEach(function(v){
+      var vQty=cart[v.id]?cart[v.id].qty:0;
+      var vBase=getTshirtBaseQty(parsed.base)-newQty-(vQty-vQty);
+      var vMax=Math.min(v.stock,PER_PERSON_LIMIT-(getTshirtBaseQty(parsed.base)-newQty));
+      var qpEl=document.getElementById('gqp-'+gKey);
+      if(qpEl&&sel.value===v.id)qpEl.disabled=newQty>=vMax||p.stock===0;
+    });
+  }
+  updateCartDisplay();
+}
+
+function getEffectiveStock(p){
+  if(p.bundleA&&p.bundleB){
+    var pa=products.find(function(x){return x.id===p.bundleA;});
+    var pb=products.find(function(x){return x.id===p.bundleB;});
+    if(pa&&pb)return Math.min(pa.stock,pb.stock);
+  }
+  return p.stock;
+}
+
+function getGroupUsed(excludeId){
+  return SHARED_GROUP_IDS.reduce(function(s,gid){
+    return s+(gid!==excludeId?(cart[gid]?cart[gid].qty:0):0);
+  },0);
+}
+
+function changeQty(id,d){
+  var p=products.find(function(x){return x.id===id;});
+  if(!p)return;
+  var stock=getEffectiveStock(p);
+  var cur=cart[id]?cart[id].qty:0;
+  var newQty=cur+d;
+  if(newQty<0)newQty=0;
+
+  // 計算上限
+  var maxQty=stock;
+  var errMsg='';
+  var inKeychain=SHARED_GROUP_IDS.indexOf(id)>-1;
+  var parsed=parseName(p.name);
+  var isTshirt=parsed.size&&p.name.indexOf(TSHIRT_KEYWORD)>-1;
+
+  if(inKeychain){
+    var limit=getKeychainMax(id);
+    maxQty=Math.min(stock,limit);
+    if(id===BUNDLE_ID) errMsg='A、B款各限購 '+PER_PERSON_LIMIT+' 件（套組各算1件）';
+    else errMsg='此款鑰匙圈已達購買上限（含套組，A/B款各最多 '+PER_PERSON_LIMIT+' 件）';
+  } else if(isTshirt){
+    // 同款式T恤加總上限
+    var baseQty=getTshirtBaseQty(parsed.base)-(cur);// 排除自己
+    maxQty=Math.min(stock,PER_PERSON_LIMIT-baseQty);
+    errMsg='同款 T恤（'+parsed.base+'）合計限購 '+PER_PERSON_LIMIT+' 件';
+  } else {
+    maxQty=Math.min(stock,PER_PERSON_LIMIT);
+    errMsg='每人限購 '+PER_PERSON_LIMIT+' 個';
+  }
+
+  if(newQty>maxQty){
+    newQty=maxQty;
+    toast(errMsg,'err');
+  }
+  if(newQty===0){delete cart[id];}
+  else{cart[id]={qty:newQty,size:'',name:p.name};}
+
+  document.getElementById('qn-'+id).textContent=newQty;
+  document.getElementById('qm-'+id).disabled=newQty===0;
+  // 重新計算 + 按鈕上限（鑰匙圈需重算因為bundle qty可能變）
+  var newMax;
+  if(inKeychain) newMax=Math.min(stock,getKeychainMax(id));
+  else if(isTshirt) newMax=Math.min(stock,PER_PERSON_LIMIT-(getTshirtBaseQty(parsed.base)-newQty));
+  else newMax=Math.min(stock,PER_PERSON_LIMIT);
+  document.getElementById('qp-'+id).disabled=newQty>=newMax||stock===0;
+  document.getElementById('card-'+id).classList.toggle('selected',newQty>0);
+  updateCartDisplay();
+  // 重新整理其他鑰匙圈按鈕狀態
+  if(inKeychain) refreshKeychainButtons();
+}
+
+function refreshKeychainButtons(){
+  [BUNDLE_ID,BUNDLE_A_ID,BUNDLE_B_ID].forEach(function(id){
+    if(!id)return;
+    var p=products.find(function(x){return x.id===id;});
+    if(!p)return;
+    var stock=getEffectiveStock(p);
+    var qty=cart[id]?cart[id].qty:0;
+    var max=Math.min(stock,getKeychainMax(id));
+    var qpEl=document.getElementById('qp-'+id);
+    if(qpEl)qpEl.disabled=qty>=max||stock===0;
+  });
+}
+
+function updateCartDisplay(){
+  var keys=Object.keys(cart);
+  var preview=document.getElementById('cart-preview');
+  var nextBtn=document.getElementById('next-btn');
+  if(!keys.length){preview.style.display='none';nextBtn.disabled=true;return;}
+  var total=0;
+  document.getElementById('cart-rows').innerHTML=keys.map(function(id){
+    var p=products.find(function(x){return x.id===id;});
+    if(!p)return'';
+    var sub=p.price*cart[id].qty;total+=sub;
+    // 顯示名稱：若 cart 有儲存 name 用那個，否則用 p.name
+    var displayName=cart[id].name||p.name;
+    return '<div class="cr"><span class="nm">'+displayName+' ×'+cart[id].qty+'</span><span class="am">NT$'+sub.toLocaleString()+'</span></div>';
+  }).join('');
+  document.getElementById('cart-total').textContent='NT$'+total.toLocaleString();
+  preview.style.display='';nextBtn.disabled=false;
+}
+
+function goToStep1(){showPanel('products');setStep(1);}
+function goToStep2(){showPanel('form');setStep(2);window.scrollTo(0,0);}
+
+function goToStep3(){
+  var name=document.getElementById('f-name').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var phone=document.getElementById('f-phone').value.trim();
+  var valid=true;
+  var ticketArea=document.getElementById('f-ticket-area').value.trim();
+  var ticketSerial=document.getElementById('f-ticket-serial').value.trim();
+  var ticket=ticketArea&&ticketSerial?ticketArea+'-'+ticketSerial:'';
+  ['f-name','f-email','f-phone','f-ticket-area','f-ticket-serial'].forEach(function(id){document.getElementById(id).classList.remove('error');});
+  if(!name){document.getElementById('f-name').classList.add('error');valid=false;}
+  if(!email||!email.includes('@')){document.getElementById('f-email').classList.add('error');valid=false;}
+  if(!phone||phone.length<8){document.getElementById('f-phone').classList.add('error');valid=false;}
+  if(!ticketArea){document.getElementById('f-ticket-area').classList.add('error');valid=false;}
+  if(!ticketSerial){document.getElementById('f-ticket-serial').classList.add('error');valid=false;}
+  if(!valid){toast('請填寫必填欄位','err');return;}
+  var keys=Object.keys(cart);var total=0;
+  document.getElementById('confirm-items').innerHTML=keys.map(function(id){
+    var p=products.find(function(x){return x.id===id;});
+    if(!p)return'';
+    var sub=p.price*cart[id].qty;total+=sub;
+    var displayName=cart[id].name||p.name;
+    return '<div class="cr"><span class="nm">'+displayName+' ×'+cart[id].qty+'</span><span class="am">NT$'+sub.toLocaleString()+'</span></div>';
+  }).join('');
+  document.getElementById('confirm-total').textContent='NT$'+total.toLocaleString();
+  document.getElementById('confirm-info').innerHTML=
+    '<div class="obr"><span class="k">姓名</span><span class="v" style="font-family:var(--sans)">'+name+'</span></div>'+
+    '<div class="obr"><span class="k">Email</span><span class="v" style="font-size:12px">'+email+'</span></div>'+
+    '<div class="obr"><span class="k">手機</span><span class="v">'+phone+'</span></div>'+
+    '<div class="obr"><span class="k">票券號碼</span><span class="v">'+ticket+'</span></div>'+
+    '<div class="obr"><span class="k">取貨方式</span><span class="v" style="font-family:var(--sans)">現場取貨</span></div>'+
+    '<div class="obr"><span class="k">付款方式</span><span class="v" style="font-family:var(--sans)">現場付款（現金）</span></div>';
+  showPanel('confirm');setStep(3);window.scrollTo(0,0);
+}
+
+function submitOrder(){
+  var btn=document.getElementById('submit-btn');
+  btn.disabled=true;btn.textContent='送出中…';
+  var name=document.getElementById('f-name').value.trim();
+  var email=document.getElementById('f-email').value.trim();
+  var phone=document.getElementById('f-phone').value.trim();
+  var ticketArea=document.getElementById('f-ticket-area').value;
+  var ticketSerial=document.getElementById('f-ticket-serial').value.trim();
+  var ticket=ticketArea&&ticketSerial ? ticketArea+'-'+ticketSerial : '';
+  var note=document.getElementById('f-note').value.trim();
+  var items=Object.keys(cart).map(function(id){
+    var p=products.find(function(x){return x.id===id;});
+    return{productId:id,qty:cart[id].qty,size:cart[id].size||'',name:cart[id].name||(p?p.name:'')};
+  });
+  fetch(getApiUrl(),{
+    method:'POST',
+    body:JSON.stringify({action:'submitPreorder',order:{
+      name:name,email:email,phone:phone,ticket:ticket,
+      pickupMethod:'現場取貨',paymentMethod:'現場付款',
+      address:'',note:note,items:items
+    }}),
+    redirect:'follow'
+  })
+  .then(function(r){return r.json();})
+  .then(function(res){
+    if(res.error)throw new Error(res.error);
+    showSuccess(res,name,email);
+  })
+  .catch(function(e){
+    toast('送出失敗：'+e.message,'err');
+    btn.disabled=false;btn.textContent='確認送出預購';
+  });
+}
+
+function showSuccess(res,name,email){
+  document.getElementById('success-msg').textContent=name+'，感謝你的預購！訂單確認信將寄送至 '+email+'。';
+  var keys=Object.keys(cart);var total=0;
+  var lines=keys.map(function(id){
+    var p=products.find(function(x){return x.id===id;});
+    if(!p)return'';
+    var sub=p.price*cart[id].qty;total+=sub;
+    var displayName=cart[id].name||p.name;
+    return '<div class="obr"><span class="k">'+displayName+' ×'+cart[id].qty+'</span><span class="am">NT$'+sub.toLocaleString()+'</span></div>';
+  }).join('');
+  document.getElementById('success-order').innerHTML=
+    '<div class="obr"><span class="k">預購編號</span><span class="v">'+res.orderId+'</span></div>'+
+    lines+
+    '<div class="obr" style="border-top:1px solid var(--border-med);margin-top:6px;padding-top:8px">'+
+      '<span class="k" style="font-weight:700">總金額</span>'+
+      '<span class="v" style="font-size:18px;color:var(--red-light)">NT$'+total.toLocaleString()+'</span>'+
+    '</div>'+
+    '<div class="obr"><span class="k">取貨</span><span class="v" style="font-family:var(--sans)">現場取貨 · 現場付款（現金）</span></div>';
+  document.getElementById('success-notice').textContent='現場取貨時，請出示預購編號【'+res.orderId+'】給工作人員核銷。';
+  document.getElementById('steps').style.display='none';
+  showPanel('success');window.scrollTo(0,0);
+}
+
+function showPanel(name){
+  ['products','form','confirm','success'].forEach(function(p){
+    document.getElementById('panel-'+p).style.display=p===name?'':'none';
+  });
+}
+function setStep(n){
+  [1,2,3].forEach(function(i){
+    var el=document.getElementById('step'+i);
+    el.classList.remove('active','done');
+    if(i===n)el.classList.add('active');
+    else if(i<n)el.classList.add('done');
+  });
+}
+function toast(msg,type){
+  var wrap=document.getElementById('twrap');
+  var el=document.createElement('div');
+  el.className='toast'+(type?' '+type:'');el.textContent=msg;
+  wrap.appendChild(el);
+  setTimeout(function(){el.classList.add('show');},10);
+  setTimeout(function(){el.classList.remove('show');setTimeout(function(){el.remove();},300);},3000);
+}
+</script>
+</body>
+</html>
