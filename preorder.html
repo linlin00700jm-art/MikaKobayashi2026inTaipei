@@ -366,7 +366,7 @@ function buildDisplayItems(prods){
   return order.map(function(key){return grouped[key];});
 }
 
-function getApiUrl(){return 'https://script.google.com/macros/s/AKfycbwIE9Dnt_1wBCVMKD9scimzcoIs56ok0L5WbYmX0E5ziLcBdh_p7r2fpL6ltpFRYvx4/exec';}
+function getApiUrl(){return 'https://script.google.com/macros/s/AKfycbx07gGJ7QmZwd6w1RD2RYuo2JyynLQJQ_YEeqEv6vcSHaRWFciljTtsOcHpt6rOZ6EL/exec';}
 
 window.addEventListener('load',function(){
   var url=getApiUrl();
@@ -374,8 +374,44 @@ window.addEventListener('load',function(){
   fetch(url+'?action=getProducts',{redirect:'follow'})
     .then(function(r){return r.json();})
     .then(function(d){
+      // 檢查預購狀態
+      var isPreview = d.preorderPreview === true;
+      var isOpen = d.preorderOpen !== false;
+      var statusMsg = d.preorderMessage || '';
+      window._preorderOpen = isOpen;
+      window._preorderPreview = isPreview;
+      window._preorderMsg = statusMsg;
+
+      if (!isOpen && !isPreview) {
+        // 完全關閉：顯示關閉訊息，不顯示商品
+        var pl = document.getElementById('product-list');
+        pl.style.display = 'flex';
+        pl.style.flexDirection = 'column';
+        pl.style.alignItems = 'center';
+        pl.style.justifyContent = 'center';
+        pl.style.minHeight = '50vh';
+        pl.style.textAlign = 'center';
+        pl.innerHTML =
+          '<div style="font-size:20px;font-weight:700;color:var(--text);margin-bottom:10px">'+statusMsg+'</div>'+
+          '<div style="font-size:13px;color:var(--text3)">如有問題請聯繫主辦單位</div>';
+        var stepBar = document.getElementById('steps');
+        if (stepBar) stepBar.style.display='none';
+        return;
+      }
+
+      // 開放或預覽模式：顯示商品
       products=(d.products||[]).filter(function(p){return p.preorderStatus==='開放';});
       displayItems=buildDisplayItems(products);
+
+      if (isPreview) {
+        // 預覽模式：顯示開放時間提示橫幅
+        var banner = document.createElement('div');
+        banner.style.cssText='background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.4);border-radius:10px;padding:12px 16px;margin-bottom:16px;text-align:center';
+        banner.innerHTML='<div style="font-size:14px;font-weight:700;color:var(--red-light);margin-bottom:4px">⏳ 預購尚未開始</div>'+
+          '<div style="font-size:12px;color:var(--text3)">商品僅供預覽，開放後才能選購</div>';
+        document.getElementById('product-list').before(banner);
+      }
+
       renderProducts();
     })
     .catch(function(e){toast('載入失敗：'+e.message,'err');});
@@ -463,7 +499,7 @@ function renderGroupCard(p){
   }).join('');
   var placeholder='<option value="" disabled selected style="color:var(--text3)">選擇尺寸 Size</option>';
   var sizeHtml='<select class="size-select" id="gsize-'+gKey+'" onchange="onGroupSizeChange(\''+gKey+'\')"'+(allOut?' disabled':'')+'>'+placeholder+sizeOptions+'</select>';
-  var stockHtml=allOut?'<span class="p-sold-out">售完</span>':'<span id="gstock-'+gKey+'" style="font-size:11px;color:var(--text3);margin-bottom:8px;display:block"></span>';
+  var stockHtml=allOut?'<span class="p-sold-out">售完</span>':'';
   return '<div class="product-card'+(allOut?' sold-out':'')+'" id="card-g-'+gKey+'">'+
     sliderHtml+
     '<div class="pc-body">'+
@@ -516,8 +552,7 @@ function onGroupSizeChange(gKey){
   if(!sel)return;
   var p=products.find(function(x){return x.id===sel.value;});
   if(!p)return;
-  var stockEl=document.getElementById('gstock-'+gKey);
-  if(stockEl)stockEl.textContent=p.stock>0?'剩 '+p.stock+' 件':'售完';
+
   var qty=cart[p.id]?cart[p.id].qty:0;
   document.getElementById('gqn-'+gKey).textContent=qty;
   document.getElementById('gqm-'+gKey).disabled=qty===0;
@@ -526,6 +561,7 @@ function onGroupSizeChange(gKey){
 }
 
 function changeGroupQty(gKey,d){
+  if(window._preorderPreview){toast('預購尚未開始，敬請期待！','err');return;}
   var sel=document.getElementById('gsize-'+gKey);
   if(!sel)return;
   if(!sel.value){toast('請先選擇尺寸','err');return;}
@@ -576,6 +612,7 @@ function getGroupUsed(excludeId){
 }
 
 function changeQty(id,d){
+  if(window._preorderPreview){toast('預購尚未開始，敬請期待！','err');return;}
   var p=products.find(function(x){return x.id===id;});
   if(!p)return;
   var stock=getEffectiveStock(p);
